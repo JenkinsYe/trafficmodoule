@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csdn.xs.exhausts.trafficmodoule.mapper.WeatherMapper">
+    <insert id="insertWeather">
+        insert into weather(city, weather, temperature, winddirection, windpower, humidity, reporttime)
+        value (#{city,jdbcType=VARCHAR} , #{weather,jdbcType=VARCHAR} , #{temperature,jdbcType=DOUBLE} , #{windDirection,jdbcType=VARCHAR} ,
+                #{windPower,jdbcType=VARCHAR} , #{humidity,jdbcType=DOUBLE} , #{reportTime,jdbcType=TIMESTAMP} )
+    </insert>
+</mapper>

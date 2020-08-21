@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csdn.xs.exhausts.trafficmodoule.mapper.StatisticMapper">
+
+    <resultMap id="statistics" type="com.csdn.xs.exhausts.trafficmodoule.domain.StatisticDomain">
+        <result column="id" property="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        <result column="通道名" property="channelName" javaType="String" jdbcType="VARCHAR"/>
+        <result column="通道编号" property="channelID" javaType="String" jdbcType="VARCHAR"/>
+        <result column="统计时间" property="time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <result column="车流量" property="amount" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result column="类型数量" property="typeAndNum" javaType="String" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertStatistic" parameterType="java.util.List">
+        insert into statistics(通道名, 通道编号, 统计时间, 车流量, 类型数量)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.channelName, jdbcType=VARCHAR},
+            #{item.channelID, jdbcType=VARCHAR},
+            #{item.time, jdbcType=TIMESTAMP},
+            #{item.amount, jdbcType=INTEGER},
+            #{item.typeAndNum, jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

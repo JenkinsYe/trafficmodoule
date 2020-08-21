@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csdn.xs.exhausts.trafficmodoule.mapper.ProcessMapper">
+    <resultMap id="process" type="com.csdn.xs.exhausts.trafficmodoule.domain.ProcessDomain">
+        <result column="id" property="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="每次检验编号" property="testID" jdbcType="VARCHAR" javaType="String"/>
+        <result column="尾气检测时间" property="testTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="逐秒车速" property="v" jdbcType="DECIMAL" javaType="Double"/>
+        <result column="加速度" property="a" jdbcType="DOUBLE" javaType="Double"/>
+        <result column="vsp" property="vsp" jdbcType="DOUBLE" javaType="Double"/>
+        <result column="vsp_bin" property="vspBin" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="逐秒no浓度" property="no" jdbcType="DOUBLE" javaType="Double"/>
+        <result column="逐秒co浓度" property="co" jdbcType="DOUBLE" javaType="Double"/>
+        <result column="逐秒hc浓度" property="hc" jdbcType="DOUBLE" javaType="Double"/>
+    </resultMap>
+
+    <select id="findProcessByTestID" resultMap="process">
+        select * from process where 每次检验编号 = #{testID,jdbcType=VARCHAR} order by 尾气检测时间 asc ;
+    </select>
+
+    <update id="updateProcess" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update process set 加速度 = #{item.a, jdbcType=DOUBLE}, vsp = #{item.vsp, jdbcType=DOUBLE}, vsp_bin = #{item.vspBin, jdbcType=INTEGER}
+            where id=#{item.id, jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+    <select id="findDistinctTestId" resultType="java.lang.String">
+        select distinct 每次检验编号 from process
+    </select>
+</mapper>
