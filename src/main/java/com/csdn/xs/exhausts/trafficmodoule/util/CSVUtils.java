@@ -16,7 +16,7 @@ import java.util.List;
 public class CSVUtils {
 
     public static HashSet<String> read() {
-        String filePath = "/Users/YJJ/Desktop/merge_remote.csv";
+        String filePath = "/Users/ye/Desktop/JYBH.csv";
         HashSet<String> set = new HashSet<>();
         try {
             Reader reader = new FileReader(filePath);
@@ -35,7 +35,7 @@ public class CSVUtils {
     }
 
     public static void writes(List<ArrayList<Object>> data) throws IOException {
-        File file = new File("/Users/YJJ/Desktop/data.csv");
+        File file = new File("/Users/ye/Desktop/data.csv");
         Appendable printWriter = new PrintWriter(file, "utf8");
         CSVPrinter csvPrinter = CSVFormat.EXCEL.withHeader("检验编号", "no1", "co1", "hc1",
                 "no2", "co2", "hc2",
